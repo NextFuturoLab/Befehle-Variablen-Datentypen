@@ -1,33 +1,24 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-
+import org.junit.Test;
+import static org.junit.Assert.*;
 import java.io.*;
 
-public class TestHello {
-
-   @Test
-   public void testHelloWorld()
-   {
-     PrintStream originalOut = System.out;
-     ByteArrayOutputStream bos = new ByteArrayOutputStream();
-     System.setOut(new PrintStream(bos));
-
-     // action
-     Hello.main(null);
-
-     // assertion
-     String expected = ""
+public class Aufgabe_Test {
+  @Test
+  public void testMainOutput() throws Exception {
+    PrintStream oldOut = System.out;
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    System.setOut(new PrintStream(baos));
+    try {
+      Aufgabe.main(new String[0]);
+    } finally {
+      System.setOut(oldOut);
+    }
+    String output = baos.toString().replace("\r\n", "\n");
+    String expected = ""
       + "3 erwartet: 3\n"
       + "8 erwartet: 8\n"
       + "5 erwartet: 5\n"
       + "3 erwartet: 3\n";
-     assertEquals(expected, bos.toString());
-
-     // undo the binding in System
-     System.setOut(originalOut);
-   }
+    assertEquals(expected, output);
+  }
 }
