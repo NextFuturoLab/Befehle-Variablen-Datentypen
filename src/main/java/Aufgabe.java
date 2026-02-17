@@ -1,4 +1,4 @@
-class VariablenDeklarieren {
+class Aufgabe {
   public static void main(String[] args) {
     // deklariere eine Variable "birnen" vom Typ int
 
